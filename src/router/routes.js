@@ -5,7 +5,9 @@ const routes = [
     path: '/home',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/Index.vue') }
+      { path: '', component: () => import('pages/Index.vue') },
+      { path: '/contrato_colectivos', component: () => import('pages/C_Colectivo.vue') },
+      { path: '/contrato_trabajadores', component: () => import('pages/C_Trabajador.vue') }
     ]
   },
   {
@@ -21,7 +23,7 @@ const routes = [
     path: '*',
     component: () => import('pages/Error404.vue')
   }
-  
+
 ]
 
 export default routes
