@@ -32,9 +32,7 @@
               </q-card-section>
             </q-card>
           </q-expansion-item>
-          <q-expansion-item
-
-          >
+          <q-expansion-item>
             <template v-slot:header>
               <q-item-section avatar >
                 <q-icon name="description" color="primary" text-color="white" />
@@ -122,9 +120,6 @@
 
     <q-page-container>
       <router-view/>
-
-
-
     </q-page-container>
 
     <q-footer elevated class="bg-grey-8 text-white">
@@ -148,7 +143,7 @@ export default {
   // components: { EssentialLink },
   data() {
     return {
-      right: false,
+      right: true,
       link: ''
     };
   }
