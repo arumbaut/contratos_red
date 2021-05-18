@@ -1,5 +1,5 @@
 <template>
-  <q-page class=" window-height window-width row justify-center items-center">
+  <q-page class=" window-height window-width row justify-center items-center" :style="{'background-image': 'url(' + require('assets/bg.jpg') + ')'}">
       <div class="column ">
       <div class="row flex-center bg-light-blue-4 shadow-up-5">
         <h5 class="text-h5 text-white q-my-md">Sing In</h5>
