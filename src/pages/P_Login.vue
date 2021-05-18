@@ -1,37 +1,50 @@
 <template>
-  <q-page class=" window-height window-width row justify-center items-center" :style="{'background-image': 'url(' + require('assets/bg.jpg') + ')'}">
-      <div class="column ">
-      <div class="row flex-center bg-light-blue-4 shadow-up-5">
-        <h5 class="text-h5 text-white q-my-md">Sing In</h5>
+  <q-page class=" window-height window-width img row justify-center items-center"
+          :style="{'background-image': 'url(' + require('assets/bg.jpg') + ')', 'height':64+'px'} ">
+    <div class="column ">
+      <div class="row flex-center">
+        <h4 class="text-weight-light text-white q-my-md">Have an account?</h4>
       </div>
-      <div class="row">
-        <q-card square bordered class="q-pa-lg shadow-1">
-          <q-card-section>
-            <q-form class="q-gutter-md">
-              <q-input square clearable v-model="email" type="email" label="email" />
-              <q-input square clearable v-model="password" type="password" label="password" />
-            </q-form>
-          </q-card-section>
-          <q-card-actions class="q-px-md">
-            <q-btn unelevated color="light-green-7" size="md" class="full-width" label="Login" />
-          </q-card-actions>
-          <q-card-section class="text-center q-pa-none">
-            <p class="text-grey-6">Not reigistered? Created an Account</p>
-          </q-card-section>
-        </q-card>
-      </div>
+      <q-form class="q-gutter-md q-mt-md">
+        <q-input color="grey-3" rounded outlined label-color="white" v-model="email" type="email"
+                 label="Email"/>
+        <q-input color="grey-3" rounded outlined borderless label-color="white" v-model="password"
+                 :type="isPwd ? 'password' : 'text'" label="Password">
+          <template v-slot:append>
+            <q-icon
+              :name="isPwd ? 'visibility_off' : 'visibility'"
+              class="cursor-pointer"
+              color="white"
+              @click="isPwd = !isPwd"
+            />
+          </template>
+        </q-input>
+
+        <q-btn unelevated rounded color="orange-2" text-color="black" size="lg" class="full-width" label="Sing In"/>
+      </q-form>
+
     </div>
+
   </q-page>
 </template>
 
 <script>
 export default {
- name: 'P_Login',
- data(){
-   return {
-     email:'',
-     password: ''
-   }
- }
+  name: 'P_Login',
+  data() {
+    return {
+      email: '',
+      password: '',
+      isPwd:false
+    }
+  }
 }
 </script>
+<style>
+.img {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+</style>
