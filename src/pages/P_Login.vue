@@ -19,25 +19,69 @@
             />
           </template>
         </q-input>
-
-        <q-btn unelevated rounded color="orange-2" text-color="black" size="lg" class="full-width" label="Sing In"/>
       </q-form>
-
+      <q-btn @click="autenticar" unelevated rounded color="orange-2" text-color="black" size="lg" class="full-width q-mt-md" label="Sing In"/>
+      <q-btn @click="salvarUser" unelevated rounded color="orange-2" text-color="black" size="lg" class="full-width q-mt-md" label="Salvar"/>
     </div>
 
   </q-page>
 </template>
 
 <script>
+import bcrypt from "bcryptjs"
+let listaUser = [];
 export default {
   name: 'P_Login',
   data() {
     return {
       email: '',
       password: '',
-      isPwd:false
+      isPwd:true
     }
-  }
+  },
+  methods: {
+    salvarUser(){
+      let user = {
+        email:'',
+        password:''
+      }
+      user.email = this.email
+      user.password = this.password
+      bcrypt.genSalt(10, function(err, salt) {
+        bcrypt.hash(user.password, salt, function(err, hash) {
+          user.password = hash
+        });
+      });
+      listaUser.push(user)
+      console.log(listaUser)
+    },
+    autenticar(){
+      let userS
+      if(listaUser.length!=0){
+        /*for (const user of listaUser) {
+              if(user.email === this.email){
+                userS = user
+              }
+
+        }*/
+        //Forma mas escapaa
+        userS= listaUser.find(({email})=>email===this.email)
+        if(userS!=undefined){
+          bcrypt.compare(this.password, userS.password, function(err, res) {
+            if(res){
+              console.log("El usuario esta autenticado")
+            }
+          });
+        }else {
+          console.log("El usuarioi no se encuentra")
+        }
+
+
+      }
+
+
+    }
+    },
 }
 </script>
 <style>
