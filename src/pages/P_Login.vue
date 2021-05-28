@@ -20,7 +20,7 @@
           </template>
         </q-input>
       </q-form>
-      <q-btn @click="autenticar" unelevated rounded color="orange-2" text-color="black" size="lg" class="full-width q-mt-md" label="Sing In"/>
+      <q-btn @click="singIn" unelevated rounded color="orange-2" text-color="black" size="lg" class="full-width q-mt-md" label="Sing In"/>
       <q-btn @click="salvarUser" unelevated rounded color="orange-2" text-color="black" size="lg" class="full-width q-mt-md" label="Salvar"/>
     </div>
 
@@ -29,6 +29,7 @@
 
 <script>
 import bcrypt from "bcryptjs"
+import {api} from 'boot/axios'
 let listaUser = [];
 export default {
   name: 'P_Login',
@@ -80,6 +81,48 @@ export default {
       }
 
 
+    },
+    singIn(){
+      /*let user=listUser.find(this.email)
+      console.log(user)
+      let datos = {
+            email: this.email,
+            pass : this.password
+            }
+      fetch('http://localhost:3000/users',{
+              method: 'POST', // or 'PUT'
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(datos),
+            })           
+            .then(resp =>{
+                console.log(resp)
+                this.$router.replace('/home')
+            } )
+              .catch(error => {
+               console.log('tenemos errores'+error)
+              });*/
+              let datos = {
+                  email: this.email,
+                  pass : this.password
+                  }
+              api.post('/login',datos)
+                .then((response) => {
+                    let data = response.data
+                    console.log(data)
+                  })
+                  .catch((e) => {
+                    console.log(e.message)
+                    let mensaje = (e.message=== "Network Error")?e.message:e.response.data.mensaje
+                    this.$q.notify({
+                      color: 'negative',
+                      position: 'top',
+                      //para coger los mensajes del error
+                      message: mensaje,
+                      icon: 'report_problem'
+                    })
+                  })
     }
     },
 }
