@@ -111,6 +111,10 @@ export default {
                 .then((response) => {
                     let data = response.data
                     console.log(data)
+                    if (data.token){
+                      this.$router.replace({name:'home'})
+                    }
+                    
                   })
                   .catch((e) => {
                     console.log(e.message)
